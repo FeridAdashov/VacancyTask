@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vacancy_task/ui/screens/pages/choice_deployment_page.dart';
+import 'package:vacancy_task/ui/screens/pages/choice_software_page.dart';
+import 'package:vacancy_task/ui/screens/pages/select_software_page.dart';
+import 'package:vacancy_task/ui/screens/pages/select_technology_page.dart';
 import 'package:vacancy_task/utils/constants.dart';
 import 'package:vacancy_task/utils/widgets/next_button.dart';
 import 'package:vacancy_task/utils/widgets/show_current_page_indicator.dart';
@@ -11,11 +15,10 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   int _pageIndex = 0;
   List<Widget> _pages = [
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Test Page'),
-      ),
-    )
+    SelectTechnologyPage(),
+    ChoiceDeploymentPage(),
+    ChoiceSoftwarePage(),
+    SelectSoftwarePage()
   ];
 
   @override
@@ -33,7 +36,7 @@ class _AccountPageState extends State<AccountPage> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: Color(0xF2FFFFFF),
       appBar: AppBar(
         leading: InkWell(
           onTap: _previousPage,
@@ -44,7 +47,7 @@ class _AccountPageState extends State<AccountPage> {
           style: TextStyle(color: Colors.black54),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
       body: Container(
@@ -76,19 +79,34 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Expanded(
-              flex: 5,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: _pages[_pageIndex],
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(15),
+                  ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: NextButton(
-                  tapFunction: () => _nextPage(),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: _pages[_pageIndex],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: NextButton(
+                          tapFunction: _nextPage,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             )

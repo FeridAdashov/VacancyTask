@@ -14,7 +14,9 @@ class ChoiceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => changeStatus,
+      onTap: () {
+        changeStatus();
+      },
       child: Container(
         height: 40,
         alignment: Alignment.center,
